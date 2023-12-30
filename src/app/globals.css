@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100&display=swap');
+@import "../styles/ckeditor.css";
+@import "../styles/loading-ring.css";
+@import "../styles/glowing.css";
+@import "../styles/switch.css";
+
+.shadowed {
+  box-shadow: 0px 10px 50px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* .sun-editor {
+  border-color: theme('colors.tileDark') !important;
+}
+.sun-editor-editable {
+  background-color: theme('colors.tileDark') !important;
+  color: white !important;
+  padding: 10px !important;
+} */

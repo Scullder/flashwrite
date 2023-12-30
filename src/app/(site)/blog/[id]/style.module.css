@@ -1,0 +1,7 @@
+.sun-editor {
+  border-color: theme('colors.background') !important;
+}
+.sun-editor-editable {
+  background-color: theme('colors.background') !important;
+  color: white !important;
+}

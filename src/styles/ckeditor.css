@@ -1,0 +1,70 @@
+.ck-editor__editable_inline {
+  min-height: 600px;
+}
+
+/* content background */
+#custom-cke .ck-main {
+  background: theme('colors.inputFocus');
+  color: theme('colors.text');
+} 
+#custom-cke .ck-content {
+  background: theme('colors.inputFocus');
+  color: theme('colors.text');
+}
+
+/* content border */
+#custom-cke .ck-focused { 
+  border: none;
+}
+#custom-cke .ck-blurred {
+  border: none;
+}
+
+/* toolbar backkground */
+#custom-cke .ck-editor__top {
+  background: theme('colors.tile');
+  color: inherit;
+}
+
+#custom-cke .ck-toolbar_grouping {
+  background: inherit;
+}
+/* toolbar font size */
+#custom-cke .ck-toolbar__items {
+  font-size: 16px;
+}
+
+/* toolbar border */
+#custom-cke .ck-toolbar {
+  border: none;
+
+}
+/* separator */
+#custom-cke .ck-toolbar__separator {   
+  background: #898989;
+}
+
+/* toolbar colors */
+#custom-cke * {
+  color: inherit;
+}
+#custom-cke .ck-button:hover {
+  cursor: pointer;
+  color: black;
+}
+#custom-cke .ck-on {
+  cursor: pointer;
+  color: black;
+}
+
+/* blockquote vertical line color */
+#custom-cke blockquote {
+  border-left: 5px solid theme('colors.background');
+}
+
+/* toolbar dropdowns */
+#custom-cke .ck-dropdown__panel.ck-dropdown__panel_se {
+  color: black;
+}
+
+

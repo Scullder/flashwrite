@@ -1,0 +1,7 @@
+button.bg-secondary:hover {
+  box-shadow: 0 0 6px theme('colors.secondary');
+}
+
+button.bg-primary:hover, input:checked + .slider {
+  box-shadow: 0 0 10px theme('colors.primary');
+}
