@@ -24,6 +24,9 @@ module.exports = {
         red: '#CB0000',
         //light: '#2A2C33',
         text: '#000',
+        alertSuccess: '#0bc20f',
+        alertWarning: '#000',
+        alertInfo: '#000',
       },
       fontFamily: {
         'roboto': ['Roboto', 'sans']

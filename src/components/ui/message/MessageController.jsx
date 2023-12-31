@@ -17,10 +17,10 @@ export function MessageController() {
     }
 
     return (
-        <>
-          {Object.keys(alertMessage).length !== 0 &&
-            <Message title={alertMessage.title} text={alertMessage.text} handleClose={close}></Message>
-          }
-        </>
+      <>
+        {Object.keys(alertMessage).length !== 0 &&
+          <Message title={alertMessage.title} text={alertMessage.text} handleClose={close} status={alertMessage.status}></Message>
+        }
+      </>
     )
 }

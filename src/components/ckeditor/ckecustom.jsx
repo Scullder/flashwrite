@@ -23,7 +23,7 @@ const config = {
   ]
 };
 
-export default function CustomEditor(props) {
+export default function CKECustom(props) {
     return (
         <div id="custom-cke">
           <CKEditor

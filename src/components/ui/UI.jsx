@@ -25,9 +25,9 @@ export function ButtonRound(props) {
 export function Button(props) {
   return (
     <button onClick={props.onClick} type={props.type ?? 'button'} className={`
-      rounded  block
+      rounded block
       ${props._class}
-      ${props.width ?? 'w-[200px]'} 
+      ${props.width ?? 'min-w-[200px]'} 
       ${props.height ?? 'h-[50px]'} 
       ${props.color ?? 'bg-secondary'} 
     `}>
@@ -83,17 +83,11 @@ export function ButtonUpload_off(props) {
       <div className="bg-tileDark p-4 rounded w-full">
         <div className="flex items-center justify-between">
           <label className="pr-4 font-bolder text-right font-medium">{props.children ?? 'Загрузка файлов'}</label>
-
           <input type="file" onChange={handleUpload} ref={realUploadInput} multiple hidden />
           <div onClick={clickRealUploadInput} className={`flex items-center p-5 h-[20px] text-lg font-bolder bg-white hover:bg-gray-200 rounded text-black hover:cursor-pointer`}>
             <FaFileUpload />
           </div>
         </div>
-
-        {/* <div className={`grid ${!props.single ? 'grid-cols-3' : 'grid-cols-1'} gap-2 mt-2`}>
-          {renderPreviews()}
-        </div> */}
-
         <div className="columns-3 gap-2">
           {renderPreviews()}
         </div>
@@ -200,7 +194,7 @@ export function Input(props) {
   if (props.type == 'textarea') {
     input = <textarea onChange={(e) => { props.handle(e.target.value) }} value={props.children} className={`${inputClass} h-44`} />
   } else {
-    input = <input onChange={(e) => { props.handle(e.target.value) }} value={props.children} className={`${inputClass}`} />
+    input = <input onChange={(e) => { props.handle(e.target.value) }} value={props.children} type={props.pass == true ? 'password' : 'text'} className={`${inputClass}`} autocomplete='off'/>
   }
 
   return (
@@ -209,6 +203,29 @@ export function Input(props) {
       {input}
       {props.error && <div className="text-sm text-red w-full block text-left">{props.error}</div>}
     </div>
+  )
+}
+
+export function InputInline(props) {
+  const inputClass = `mt-1 w-full text-md bg-inherit border border-input text-inputFocus outline-none text-md p-2 px-4 rounded focus:bg-inputFocus focus:text-black
+    ${props.error && 'border-2 border-red'}`
+
+  return (
+    <div>
+      <div className="flex items-center">
+        {props.children && <label className={`text-gray-300 ${props.error && 'text-red'} text-3xl mr-4`}>{props.children}</label>}
+        <input 
+          value={props.value} 
+          placeholder={props.placeholder ?? ''} 
+          onChange={e => props.handle(e.target.value)} 
+          type={props.pass == true ? 'password' : 'text'} 
+          className={`${inputClass}`} 
+          autoComplete="off"
+        />
+      </div>
+      {props.error && <div className="text-sm text-red w-full block text-left mt-2">{props.error}</div>}
+    </div>
+
   )
 }
 

@@ -29,7 +29,8 @@ export default function Page() {
 
     setAlertMessage({
       title: 'Новое сообщение!',
-      text: 'Text message'
+      text: 'Text message',
+      status: 'success',
     })
   }, []);
 

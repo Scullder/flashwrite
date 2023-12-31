@@ -11,7 +11,6 @@ import * as Blog from '@/lib/models/Blog'
 
 export default function Page({params}) {
   const { user } = useStateContext();
-
   const [image, setImage] = useState({});
   const [imagePreview, setImagePreview] = useState('');
   const [title, setTitle] = useState('');
@@ -20,53 +19,27 @@ export default function Page({params}) {
   const [isPublic, setIsPublic] = useState(false);
   const [errors, setErrors] = useState({});
 
-  /* const fetchBlog = (id) => {
-    axiosClient
-      .get(`/blogs/${id}`, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then(({ data }) => {
-        const blog = data.data
-        console.log(blog)
-
-        setImage(blog.image)
-        setImagePreview(blog.image)
-        setTitle(blog.title)
-        setContent(blog.content)
-        setIsPublic(blog.is_public)
-
-        if (blog.description) {
-          setDescription(blog.description)
-        }
-      })
-      .catch((error) => {
-        const response = error.response;
-        if (response && response.status === 404) {
-          // return 404
-        }
-      })
-  } */
+  const { setAlertMessage } = useStateContext()
 
   useEffect(() => {
-    if (params.id !== undefined) {
-      //fetchBlog(params.id)
-      Blog.get(params.id, (data) => {
-        const blog = data.data
-        console.log(blog)
-
-        setImage(blog.image)
-        setImagePreview(blog.image)
-        setTitle(blog.title)
-        setContent(blog.content ?? '')
-        setIsPublic(blog.is_public)
-
-        if (blog.description) {
-          setDescription(blog.description)
-        }
-      })
+    if (params.id === undefined) {
+      return
     }
+
+    Blog.get(params.id, (data) => {
+      const blog = data.data
+      console.log(blog)
+
+      setImage(blog.image)
+      setImagePreview(blog.image)
+      setTitle(blog.title)
+      setContent(blog.content ?? '')
+      setIsPublic(blog.is_public)
+
+      if (blog.description) {
+        setDescription(blog.description)
+      }
+    })
   }, [])
 
   const submit = (e) => {
@@ -74,60 +47,39 @@ export default function Page({params}) {
 
     setErrors({})
 
-    const formData = new FormData()
-
-    formData.append('author_id', user._id)
-    formData.append('title', title)
-    formData.append('description', description)
-    formData.append('content', content)
-    if (image) {
-      formData.append('image', image)
+    let blog = {
+      author_id: user._id,
+      title: title,
+      description: description,
+      content: content,
+      is_public: isPublic,
+      image: image ?? '',
     }
-    formData.append('is_public', isPublic)
-
-    console.log(formData)
 
     // Store
     if (params.id === undefined) {
-      axiosClient
-        .post('/blogs', formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then(({ data }) => {
-          window.location.replace(`/blog/edit/${data.id}`);
-        })
-        .catch((error) => {
-          const response = error.response;
-          if (response && response.status === 422) {
-            setErrors(response.data.errors)
-            console.log(response.data.errors)
-          }
-        })
-      
+      Blog.create(blog, (data) => {
+        window.location.replace(`/blog/edit/${data.id}`)
+      }, (errors) => {
+        setErrors(errors)
+      })
+
       return
     }
     
     // Update
-    formData.append("_method", "PATCH")
+    blog._method = "PATCH"
 
-    axiosClient
-      .post(`/blogs/${params.id}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+    Blog.update(params.id, blog, (data) => {
+      // show Client message "Successfuly updated"
+      setAlertMessage({
+        title: 'Success!',
+        text: 'Blog was updated successfully!',
+        status: 'success',
       })
-      .then(({ data }) => {
-        // show Client message "Successfuly updated"
-      })
-      .catch((error) => {
-        const response = error.response;
-        if (response && response.status === 422) {
-          setErrors(response.data.errors);
-          console.log(response.data.errors);
-        }
-      })
+    }, (errors) => {
+      setErrors(errors)
+    })
   }
 
   const handleImageUpload = (files) => {
