@@ -2,20 +2,24 @@
 
 import { useStateContext } from '@/contexts/ContextProvider.jsx'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Header from '@/components/Header'
 
 /* import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation' */
 
 export default function GuestLayout({ children }) {
-  const { token } = useStateContext();
-  const router = useRouter();
+  const { token } = useStateContext()
+  const router = useRouter()
   
+  const [isGuest, setIsGuest] = useState(false)
+
   useEffect(() => {
-    if(token) {
-      router.push("/profile");
+    if(token && token !== undefined) {
+      router.push("/profile")
     }
+
+    setIsGuest(true)
   }, []);
 
   /* const cookieStore = cookies();
@@ -28,7 +32,7 @@ export default function GuestLayout({ children }) {
   return (
     <>
       <Header />
-      {children}
+      {isGuest && children}
     </>
   )
 }

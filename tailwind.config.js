@@ -7,26 +7,46 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
+      /* colors: {
         header: '#09090A',
         body: '#0e121b',
-        //main: '#0B1824',
         background: '#1b2336',
         tile: '#202c44',
         tileDark: '#1b2336',
-        //navbar: '#f2f4fa',
-        //navbarHover: '#8992ad',
+        /*
         primary: '#c33f0c',
         primaryDark: '#a23101',
-        secondary: '#289499',
+        secondary: '#289499', 
+        /
+        primary: '#F0ACA1',
+        primaryGlow: '#F27289',
+        primaryDark: '#a23101',
+        secondary: '#E2F4F9',
+        secondaryGlow: '#57A5D4',
         input: '#878a91',
         inputFocus: '#dfe4ee',
         red: '#CB0000',
-        //light: '#2A2C33',
         text: '#000',
         alertSuccess: '#0bc20f',
         alertWarning: '#000',
         alertInfo: '#000',
+      }, */
+      colors: {
+        primary: '#23827d',
+        primaryDark: '#a23101',
+        secondary: '#23827d', 
+        body: '#111622',
+        background: '#1a2133',
+        tile: '#232D46',
+        tileDark: '#1b2336',
+        input: '#878a91',
+        inputFocus: '#dfe4ee',
+        red: '#CB0000',
+        text: '#000',
+        alertSuccess: '#0bc20f',
+        alertWarning: '#000',
+        alertInfo: '#000',
+        header: '#09090A',  // check
       },
       fontFamily: {
         'roboto': ['Roboto', 'sans']

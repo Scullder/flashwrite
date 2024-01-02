@@ -6,17 +6,25 @@ import axiosClient from '@/axios-client.js'
 import { BiSolidComment } from 'react-icons/bi'
 import { Button } from '@/components/ui/UI'
 import ImageSlider from '../ui/ImageSlider'
+import { RxDotsHorizontal } from "react-icons/rx"
+import Modal from '@/components/ui/modal/Modal'
+import PostEditing from '@/components/profile/forms/PostEditing'
 
 export default function ProfilePost(props) {
-  const { user } = useStateContext();
   const post = props.post;
+
+  const { user } = useStateContext();
   const [isPostHover, setPostHover] = useState(false);
   const [isCommentsOpened, setCommentsOpened] = useState(false);
   const [comment, setComment] = useState('');
-  const [errors, setErrors] = useState({});
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleCommentOpened = () => {
     setCommentsOpened(!isCommentsOpened);
+  }
+
+  const handlePostFormVisability = () => {
+    setIsEditing(!isEditing)
   }
 
   const sendComment = (e) => {
@@ -41,11 +49,19 @@ export default function ProfilePost(props) {
 
   return (
     <div className="w-full flex flex-col">
+      <Modal isVisible={isEditing} visabilityHandler={setIsEditing}>
+        <PostEditing post={post}/>
+      </Modal>
       <div className="relative m-auto p-4 rounded w-full bg-tile drop-shadow-lg|" onMouseEnter={() => setPostHover(true)} onMouseLeave={() => setPostHover(false)}>
         <div className="flex items-center gap-2 mb-4">
-          <img src={post.author.image} className="w-[40px] h-[40px] rounded-full border border-gray-700" />
-          <label>{post.author.name}</label>
-          <label className="text-gray-500 ml-auto">{post.date}</label>
+          <img src={post.author.image} className="w-[50px] h-[50px] rounded-full border border-gray-700" />
+          <div className="flex flex-col">
+            <label>{post.author.name}</label>
+            <label className="text-gray-500 ">{post.date}</label>
+          </div>
+          <div onClick={handlePostFormVisability} className="ml-auto text-3xl text-input hover:text-inputFocus hover:cursor-pointer p-2">
+            <RxDotsHorizontal />
+          </div>
         </div>
 
         {post.title && 

@@ -18,49 +18,47 @@ export default function Signup() {
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [errors, setErrors] = useState({});
 
-  const { setUser, setToken } = useStateContext();
+  const { setUser, setToken, setLoading } = useStateContext();
 
   const submit = (e) => {
     e.preventDefault();
+    setLoading(true)
 
     const payload = {
-        email: email,
-        name: name,
-        password: password,
-        password_confirmation: passwordConfirmation,
+      email: email,
+      name: name,
+      password: password,
+      password_confirmation: passwordConfirmation,
     }
 
     axiosClient.post('/user/signup', payload)
       .then(({ data }) => {
-          setToken(data.token);
-          setUser(data.user);
+        setLoading(false)
+        setToken(data.token)
+        setUser(data.user)
       })
       .catch((error) => {
-          const response = error.response;
-          if (response && response.status === 422) {
-              setErrors(response.data.errors);
-          }
+        const response = error.response;
+
+        if (response && response.status === 422) {
+          setErrors(response.data.errors);
+        }
+
+        setLoading(false)
       })
   }
 
-  const inputClass = 'w-full p-2 m-0 outline-none border-b border-gray-600 rounded-sm bg-background/50 text-center focus:border-white focus:text-white';
-  const errorClass = 'text-sm text-rose-600 w-full text-center mt-2';
-
   return (
     <div className="container w-9/12 mx-auto text-white">
-      <div className="relative w-2/6 min-h-[100px] mx-auto mt-64 bg-background p-10 pt-20 rounded-lg">
+      <div className="relative w-2/6 min-h-[100px] mx-auto mt-64 bg-inherit p-10 pt-20 rounded-lg">
         <div className="absolute -top-[75px] left-0 flex justify-center w-full">
           <div className="text-4xl bg-gray-300 text-background border-4 border-background w-[150px] h-[150px] rounded-full flex items-center justify-center">
             <FaRegUser />
           </div>
         </div>
-        <div className="flex text-lg mb-[50px]">
-          <Link href="/signup" className="flex-1 w-full border-b-4 text-center p-2">
-              Signup
-          </Link>
-          <Link href="/login" className="flex-1 w-full border-b-2 text-center p-2 text-input border-input">
-            Login
-          </Link>
+        <div className="flex text-lg mb-[50px] font-semibold">
+          <Link href="/signup" className="flex-1 w-full border-b-4 text-center p-2">Signup</Link>
+          <Link href="/login" className="flex-1 w-full border-b-2 text-center p-2 text-input border-input">Login</Link>
         </div>
         <form onSubmit={submit} className="space-y-6">
           <UI.InputInline handle={setEmail}    value={email}    error={errors.email} placeholder="email"><MdEmail/></UI.InputInline>
@@ -68,7 +66,7 @@ export default function Signup() {
           <UI.InputInline handle={setPassword} value={password} error={errors.password} placeholder="пароль" pass={true}><IoIosLock /></UI.InputInline>
           <UI.InputInline handle={setPasswordConfirmation} value={passwordConfirmation} error={errors.passwordConfirmation} placeholder="подтверждение пароля" pass={true}><GiConfirmed /></UI.InputInline>
           <div className="pt-4">
-            <UI.Button _class="mx-auto w-full" type="submit" color="bg-primary">готово</UI.Button>
+            <UI.Button _class="mx-auto w-full" type="submit" color="bg-secondary">готово</UI.Button>
           </div>
         </form>
       </div>

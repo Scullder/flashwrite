@@ -11,11 +11,16 @@
   box-shadow: 0px 10px 50px 30px rgba(0, 0, 0, 0.35);
 }
 
-/* .sun-editor {
-  border-color: theme('colors.tileDark') !important;
+/* .ey-1 {
+  box-shadow: 1px 1px 20px #F27289;
 }
-.sun-editor-editable {
-  background-color: theme('colors.tileDark') !important;
-  color: white !important;
-  padding: 10px !important;
+.ey-1:hover {
+  box-shadow: 1px 1px 30px #F0ACA1;
+}
+
+.ey-2 {
+  box-shadow: 1px 1px 20px #57A5D4;
+}
+.ey-2:hover {
+  box-shadow: 1px 1px 30px #57A5D4;
 } */

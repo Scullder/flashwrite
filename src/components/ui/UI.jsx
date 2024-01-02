@@ -25,10 +25,10 @@ export function ButtonRound(props) {
 export function Button(props) {
   return (
     <button onClick={props.onClick} type={props.type ?? 'button'} className={`
-      rounded block
+      rounded block text-white font-semibold hover:scale-105
       ${props._class}
       ${props.width ?? 'min-w-[200px]'} 
-      ${props.height ?? 'h-[50px]'} 
+      ${props.height ?? 'min-h-[50px]'} 
       ${props.color ?? 'bg-secondary'} 
     `}>
       {props.link
@@ -194,7 +194,7 @@ export function Input(props) {
   if (props.type == 'textarea') {
     input = <textarea onChange={(e) => { props.handle(e.target.value) }} value={props.children} className={`${inputClass} h-44`} />
   } else {
-    input = <input onChange={(e) => { props.handle(e.target.value) }} value={props.children} type={props.pass == true ? 'password' : 'text'} className={`${inputClass}`} autocomplete='off'/>
+    input = <input onChange={(e) => { props.handle(e.target.value) }} value={props.children} type={props.pass == true ? 'password' : 'text'} className={`${inputClass}`} autoComplete='off'/>
   }
 
   return (
@@ -213,7 +213,7 @@ export function InputInline(props) {
   return (
     <div>
       <div className="flex items-center">
-        {props.children && <label className={`text-gray-300 ${props.error && 'text-red'} text-3xl mr-4`}>{props.children}</label>}
+        {props.children && <label className={`text-gray-300 ${props.error && 'text-red'} text-xl mr-4`}>{props.children}</label>}
         <input 
           value={props.value} 
           placeholder={props.placeholder ?? ''} 
@@ -223,22 +223,22 @@ export function InputInline(props) {
           autoComplete="off"
         />
       </div>
-      {props.error && <div className="text-sm text-red w-full block text-left mt-2">{props.error}</div>}
+      {props.error && <div className="text-sm text-red w-full block text-left">{props.error}</div>}
     </div>
-
   )
 }
 
 export function Label(props) {
   return (
-    <div className="flex mb-2 border-b-2 border-gray-500 pb-4">
+    <div className="flex mb-2 border-b-2 border-gray-500 pb-4 items-center">
       <div>
         <div className="text-2xl font-bolder">{props.children}</div>
         <div className="text-md text-gray-400">{props.help}</div>
       </div>
       {props.button && 
         <div className="ml-auto space-x-2">
-          <Button width="w-40" color="bg-primary" type="submit">сохранить</Button>
+          {/* <Button width="w-40" color="bg-primary" type="submit">сохранить</Button> */}
+          {props.button}
         </div>
       }
     </div>

@@ -1,7 +1,21 @@
-button.bg-secondary:hover {
+/* button.bg-secondary:hover {
   box-shadow: 0 0 6px theme('colors.secondary');
 }
 
 button.bg-primary:hover, input:checked + .slider {
   box-shadow: 0 0 10px theme('colors.primary');
+} */
+
+/* button.bg-secondary {
+  box-shadow: 1px 1px 20px theme('colors.secondaryGlow');
 }
+button.bg-secondary:hover {
+  box-shadow: 1px 1px 30px theme('colors.secondaryGlow');
+}
+
+button.bg-primary {
+  box-shadow: 1px 1px 20px theme('colors.primaryGlow');
+}
+button.bg-primary:hover {
+  box-shadow: 1px 1px 30px theme('colors.primaryGlow');
+} */

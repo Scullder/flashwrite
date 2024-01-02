@@ -7,10 +7,10 @@ import { useEffect } from "react";
 export function MessageController() {
     const { alertMessage, setAlertMessage } = useStateContext();
 
-    useEffect(() => {
+    /* useEffect(() => {
       const timer = setTimeout(() => setAlertMessage({}), 5000)
       return () => clearTimeout(timer);
-    });
+    }); */
 
     const close = () => {
       setAlertMessage({})

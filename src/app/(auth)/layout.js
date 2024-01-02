@@ -2,7 +2,7 @@
 
 import { useStateContext } from '@/contexts/ContextProvider.jsx'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Header from '@/components/Header'
 
 /* import { cookies } from 'next/headers'
@@ -10,14 +10,19 @@ import { redirect } from 'next/navigation'
 import Cookies from 'js-cookie' */
 
 export default function AuthLayout({ children }) {
-  const { setUser, token } = useStateContext();
+  const { setUser, setToken, token } = useStateContext();
   const router = useRouter();
   
+  let [isAuth, setIsAuth] = useState(false)
+
   useEffect(() => {
-    if(!token) {
+    if(!token && token === undefined) {
       setUser({})
+      setToken(null)
       router.push("/login");
     }
+
+    setIsAuth(true)
   }, []);
 
   /* const cookieStore = cookies();
@@ -31,7 +36,7 @@ export default function AuthLayout({ children }) {
   return (
     <>
       <Header />
-      {children}
+      {isAuth && children}
     </>
   )
 }

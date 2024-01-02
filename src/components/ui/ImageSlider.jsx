@@ -9,10 +9,16 @@ export default function ImageSlider({ slides, globKey }) {
 
   return (
     <div className="w-full h-full">
-      <img src={slides[currentIndex]} className="object-scale-down h-full w-full"/>
+      {slides[currentIndex] && 
+        <img src={slides[currentIndex]} className="object-scale-down h-full w-full"/>
+      }
       <div className="grid grid-cols-4 gap-2 mt-2">
         {slides.length > 1 && 
           slides.map((slide, index) => {
+            if (!slides[index]) {
+              return
+            }
+
             let imageClass = `object-scale-down h-full w-full hover:cursor-pointer ${index != currentIndex && 'grayscale'} hover:grayscale-0`
             return (<img src={slides[index]} onClick={() => selectSlide(index)} className={imageClass} key={`${globKey}-${index}`}/>)
           })
