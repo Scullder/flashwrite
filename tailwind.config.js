@@ -31,13 +31,30 @@ module.exports = {
         alertWarning: '#000',
         alertInfo: '#000',
       }, */
-      colors: {
+      /* colors: {
         primary: '#23827d',
         primaryDark: '#a23101',
         secondary: '#23827d', 
         body: '#111622',
         background: '#1a2133',
         tile: '#232D46',
+        tileDark: '#1b2336',
+        input: '#878a91',
+        inputFocus: '#dfe4ee',
+        red: '#CB0000',
+        text: '#000',
+        alertSuccess: '#0bc20f',
+        alertWarning: '#000',
+        alertInfo: '#000',
+        header: '#09090A',  // check
+      }, */
+      colors: {
+        primary: '#23827d',
+        primaryDark: '#a23101',
+        secondary: '#23827d', 
+        body: '#0c1018',
+        background: '#181f2f',
+        tile: '#212a3f',
         tileDark: '#1b2336',
         input: '#878a91',
         inputFocus: '#dfe4ee',
