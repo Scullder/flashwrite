@@ -36,6 +36,7 @@ export default function Signup() {
         setLoading(false)
         setToken(data.token)
         setUser(data.user)
+        window.location.replace(`/profile/${data.user._id}`)
       })
       .catch((error) => {
         const response = error.response;

@@ -13,7 +13,7 @@ import PostEditing from '@/components/profile/forms/PostEditing'
 export default function ProfilePost(props) {
   const post = props.post;
 
-  const { user } = useStateContext();
+  const { user, token } = useStateContext();
   const [isPostHover, setPostHover] = useState(false);
   const [isCommentsOpened, setCommentsOpened] = useState(false);
   const [comment, setComment] = useState('');
@@ -48,20 +48,22 @@ export default function ProfilePost(props) {
   }
 
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col my-10">
       <Modal isVisible={isEditing} visabilityHandler={setIsEditing}>
         <PostEditing post={post}/>
       </Modal>
-      <div className="relative m-auto p-4 rounded w-full bg-tile drop-shadow-lg|" onMouseEnter={() => setPostHover(true)} onMouseLeave={() => setPostHover(false)}>
+      <div className="relative m-auto p-4 rounded w-full bg-tile drop-shadow" onMouseEnter={() => setPostHover(true)} onMouseLeave={() => setPostHover(false)}>
         <div className="flex items-center gap-2 mb-4">
           <img src={post.author.image} className="w-[50px] h-[50px] rounded-full border border-gray-700" />
           <div className="flex flex-col">
             <label>{post.author.name}</label>
             <label className="text-gray-500 ">{post.date}</label>
           </div>
-          <div onClick={handlePostFormVisability} className="ml-auto text-3xl text-input hover:text-inputFocus hover:cursor-pointer p-2">
-            <RxDotsHorizontal />
-          </div>
+          {props.authorId == post.authorId && props.authorId == user._id && token &&
+            <div onClick={handlePostFormVisability} className="ml-auto text-3xl text-input hover:text-inputFocus hover:cursor-pointer p-2">
+              <RxDotsHorizontal />
+            </div>
+          }
         </div>
 
         {post.title && 

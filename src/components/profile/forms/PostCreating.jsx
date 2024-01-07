@@ -12,7 +12,7 @@ export default function PostCreating(props) {
   const [files, setFiles] = useState([])
   const [filePreviews, setFilePreviews] = useState([])
 
-  const {setLoading} = useStateContext()
+  const { user, setLoading } = useStateContext()
 
   const handleImageUpload = (loadedFiles) => {
     const uploadedFiles = [...files, ...loadedFiles]
@@ -46,7 +46,7 @@ export default function PostCreating(props) {
 
     Post.create(payload, (data) => {
       setLoading(false)
-      window.location.replace("/profile/posts")
+      window.location.replace(`/profile/${user._id}`)
     }, (errors) => {
       setErrors(errors)
       setLoading(false)

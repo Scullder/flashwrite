@@ -9,14 +9,16 @@ import Header from '@/components/Header'
 import { redirect } from 'next/navigation' */
 
 export default function GuestLayout({ children }) {
-  const { token } = useStateContext()
+  const { token, user } = useStateContext()
   const router = useRouter()
   
   const [isGuest, setIsGuest] = useState(false)
 
+  console.log(user)
+
   useEffect(() => {
     if(token && token !== undefined) {
-      router.push("/profile")
+      router.push(`/profile/${user._id}`)
     }
 
     setIsGuest(true)
